@@ -3,21 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameInput : MonoBehaviour {
-    public Vector2 GetNormalisedMovementVector() {
-        Vector2 inputVector = new(0,0);
+    private PlayerInputConsole playerInputConsole;
 
-        if (Input.GetKey(KeyCode.W)) {
-            inputVector.y += 1;
-        }
-        if (Input.GetKey(KeyCode.A)) {
-            inputVector.x += -1;
-        }
-        if (Input.GetKey(KeyCode.S)) {
-            inputVector.y += -1;
-        }
-        if (Input.GetKey(KeyCode.D)) {
-            inputVector.x += 1;
-        }
+    private void Awake() {
+        playerInputConsole = new PlayerInputConsole();
+        playerInputConsole.Player.Enable();
+    }
+
+    public Vector2 GetNormalisedMovementVector() {
+        Vector2 inputVector = playerInputConsole.Player.Move.ReadValue<Vector2>();
 
         inputVector = inputVector.normalized;
 
