@@ -9,6 +9,30 @@ public class Player : MonoBehaviour {
     [SerializeField] private LayerMask couterLayerMask;
     private Vector3 lastMoveDir;
     private bool isWalking;
+
+    private void Start() {
+        gameInput.OnInteractAction += OnInteractAction_Listner;
+
+    }
+
+    private void OnInteractAction_Listner(object sender, System.EventArgs args) {
+        // movedir args mei mnga skte kya???
+        Vector2 inputVector = gameInput.GetNormalisedMovementVector();
+
+        Vector3 moveDir = new(inputVector.x, 0, inputVector.y);
+
+        if (isWalking) {
+            lastMoveDir = moveDir;
+        }
+
+        float interactionDistance = 2f;
+        if (Physics.Raycast(transform.position, lastMoveDir, out RaycastHit raycastHit, interactionDistance, couterLayerMask)) {
+            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
+                clearCounter.Interact();
+            }
+        }
+    }
+
     private void Update() {
         Vector2 inputVector = gameInput.GetNormalisedMovementVector();
 
@@ -27,7 +51,7 @@ public class Player : MonoBehaviour {
         float interactionDistance = 2f;
         if (Physics.Raycast(transform.position, lastMoveDir, out RaycastHit raycastHit, interactionDistance, couterLayerMask)) {
             if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-                clearCounter.Interact();
+                // clearCounter.Interact();
             }
         }
     }
