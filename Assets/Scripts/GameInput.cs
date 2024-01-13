@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameInput : MonoBehaviour {
     private PlayerInputConsole playerInputConsole;
+
     public event EventHandler OnInteractAction;
 
     private void Awake() {

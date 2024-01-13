@@ -8,16 +8,18 @@ using UnityEngine.Rendering.Universal;
 public class Player : MonoBehaviour {
 
     public static Player Instance {private set;  get;}
+
+    public event EventHandler<OnSeledtedCounterChangeArgs> OnSeledtedCounterChange;
+    public class OnSeledtedCounterChangeArgs : EventArgs {
+        public ClearCounter selectedCounter;
+    }
+
     [SerializeField] private float moveSpeed;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask couterLayerMask;
     private Vector3 lastMoveDir;
     private bool isWalking;
     private ClearCounter selectedCounter;
-    public event EventHandler<OnSeledtedCounterChangeArgs> OnSeledtedCounterChange;
-    public class OnSeledtedCounterChangeArgs : EventArgs {
-        public ClearCounter selectedCounter;
-    }
 
     private void Awake() {
         if (Instance != null) {
