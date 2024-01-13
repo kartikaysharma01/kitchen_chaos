@@ -42,11 +42,11 @@ public class Player : MonoBehaviour {
         Vector3 moveDir = new(inputVector.x, 0, inputVector.y);
 
         HandlePlayerMovement(moveDir);
-        HandleCounterInteractions(moveDir);
+        HandleCounterApproach(moveDir);
     }
 
-    private void HandleCounterInteractions(Vector3 moveDir) {
-        
+    // highlights the counter the player is standing in front of / can interact with
+    private void HandleCounterApproach(Vector3 moveDir) {  
         if (isWalking) {
             lastMoveDir = moveDir;
         }
@@ -115,7 +115,5 @@ public class Player : MonoBehaviour {
         OnSeledtedCounterChange?.Invoke(this, new OnSeledtedCounterChangeArgs{
             selectedCounter = selectedCounter
         });
-
     }
- 
 }
