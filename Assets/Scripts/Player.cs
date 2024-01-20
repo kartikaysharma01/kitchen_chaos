@@ -33,6 +33,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
     private void Start() {
         gameInput.OnInteractAction += OnInteractAction_Listner;
+        gameInput.OnInteractAlternateAction += OnInteractAlternateAction_Listner;
     }
 
     private void OnInteractAction_Listner(object sender, EventArgs args) {
@@ -41,6 +42,11 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         }
     }
 
+    private void OnInteractAlternateAction_Listner(object sender, EventArgs args) {
+        if (selectedCounter != null) {
+            selectedCounter.InteractAlternate(this);
+        }
+    }
     private void Update() {
         Vector2 inputVector = gameInput.GetNormalisedMovementVector();
 

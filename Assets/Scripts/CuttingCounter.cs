@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CuttingCounter : BaseCounter {
+    [SerializeField] private KitchenObjectSO cutKitchenObjectSO;
+
     // on interact, let player pickup or drop kitchen objects
     public override void Interact(Player player) {
         if (!HasKitchenObject()) {
@@ -23,5 +25,16 @@ public class CuttingCounter : BaseCounter {
             }
         }
     }
- 
+
+    // if kitchen object is found, destroys it and spawns a cut one
+    public override void InteractAlternate(Player player) {
+        if (HasKitchenObject()) {
+            // There is a kitchen object here, chop chop
+            GetKitchenObject().DestroySelf();
+
+            Transform kitchenObjectTransform = Instantiate(cutKitchenObjectSO.prefab);
+            kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
+        }
+    }
+
 }
