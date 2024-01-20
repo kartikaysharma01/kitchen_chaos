@@ -10,8 +10,11 @@ public class ContainerCounter : BaseCounter, IKitchenObjectParent {
 
     // on interact, play counter open_close animation, spawn a kitchen object and give it to the player
     public override void Interact(Player player) {
-        OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
-        Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
-        kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
+        if (!player.HasKitchenObject()) {
+            // player is not carrying anything, let him pickup
+            OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
+            Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
+            kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
+        }
     }
 }
