@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, IKitchenObjectParent {
 
     public static Player Instance {private set;  get;}
 
@@ -17,6 +17,9 @@ public class Player : MonoBehaviour {
     [SerializeField] private float moveSpeed;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask couterLayerMask;
+    [SerializeField] private Transform kitchenObjectHoldPoint;
+    
+    private KitchenObject kitchenObject;
     private Vector3 lastMoveDir;
     private bool isWalking;
     private ClearCounter selectedCounter;
@@ -27,14 +30,14 @@ public class Player : MonoBehaviour {
         }
         Instance = this;
     }
+
     private void Start() {
         gameInput.OnInteractAction += OnInteractAction_Listner;
-
     }
 
     private void OnInteractAction_Listner(object sender, EventArgs args) {
         if (selectedCounter != null) {
-            selectedCounter.Interact();
+            selectedCounter.Interact(this);
         }
     }
 
@@ -47,7 +50,7 @@ public class Player : MonoBehaviour {
         HandleCounterApproach(moveDir);
     }
 
-    // highlights the counter the player is standing in front of / can interact with
+    // sets selected counter and fires related event for selectedCounterLogic script to listen and change visual
     private void HandleCounterApproach(Vector3 moveDir) {  
         if (isWalking) {
             lastMoveDir = moveDir;
@@ -118,4 +121,25 @@ public class Player : MonoBehaviour {
             selectedCounter = selectedCounter
         });
     }
+
+    public Transform GetKitechObjectSpawnPoint() {
+        return kitchenObjectHoldPoint;
+    }
+
+    public void SetKitchenObject(KitchenObject kitchenObject) {
+        this.kitchenObject = kitchenObject;
+    }
+
+    public KitchenObject GetKitchenObject() {
+        return kitchenObject;
+    }
+
+    public void ClearKitchenObject() {
+        kitchenObject = null;
+    }
+
+    public bool HasKitchenObject() {
+        return kitchenObject != null;
+    }
+
 }
