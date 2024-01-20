@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// plays walking animation on player if it is walking
 public class PlayerAnimator : MonoBehaviour {
 
     private const string IS_WALKING = "IsWalking";

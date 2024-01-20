@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// if player comes in interactable distance to a counter, shows the selected counter visual
 public class SelectedCounterLogic : MonoBehaviour {
     
     [SerializeField] private ClearCounter clearCounter;
