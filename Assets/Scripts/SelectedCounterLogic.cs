@@ -5,15 +5,15 @@ using UnityEngine;
 // if player comes in interactable distance to a counter, shows the selected counter visual
 public class SelectedCounterLogic : MonoBehaviour {
     
-    [SerializeField] private ClearCounter clearCounter;
-    [SerializeField] private GameObject selctedVisualGameObject;
+    [SerializeField] private BaseCounter baseCounter;
+    [SerializeField] private GameObject[] selctedVisualGameObjectArray;
 
     private void Start(){
         Player.Instance.OnSeledtedCounterChange += Player_OnSeledtedCounterChange;
     }
 
     private void Player_OnSeledtedCounterChange(object sender, Player.OnSeledtedCounterChangeArgs e) {
-        if (e.selectedCounter == clearCounter) {
+        if (e.selectedCounter == baseCounter) {
             Show();
         } else {
             Hide();
@@ -21,10 +21,14 @@ public class SelectedCounterLogic : MonoBehaviour {
     }
 
     private void Show() {
-        selctedVisualGameObject.SetActive(true);
+        foreach (GameObject selctedVisualGameObject in selctedVisualGameObjectArray) {
+            selctedVisualGameObject.SetActive(true);
+        }
     }
 
     private void Hide() {
-        selctedVisualGameObject.SetActive(false);
+        foreach (GameObject selctedVisualGameObject in selctedVisualGameObjectArray) {
+            selctedVisualGameObject.SetActive(false);
+        }
     }
 }
