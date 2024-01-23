@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: 7d9fe5de64184434b803f4af298f2520
+guid: 5228a74644b8349e580f598b1e23ffc9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - counterTopPoint: {instanceID: 0}
-  - cutKitchenObjectSO: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
