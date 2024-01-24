@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,6 +13,7 @@ public class CuttingCounter : BaseCounter {
     public class OnCuttingProgressChangeArgs: EventArgs {
         public float progressNormalised;
     }
+    public event EventHandler OnCut;
 
     // on interact, let player pickup or drop kitchen objects
     public override void Interact(Player player) {
@@ -46,6 +48,7 @@ public class CuttingCounter : BaseCounter {
         if (HasKitchenObject() && HasReceipeWithInput(GetKitchenObject().GetKitchenObjectSO())) {
             cuttingProgress++; 
             CuttingReceipeSO cuttingReceipeSO = GetCuttingReceipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
+            OnCut?.Invoke(this, EventArgs.Empty);
             OnCuttingProgressChange?.Invoke(this, new OnCuttingProgressChangeArgs{
                 progressNormalised = (float)cuttingProgress / cuttingReceipeSO.cuttingProgressMax
             });
