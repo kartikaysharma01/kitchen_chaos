@@ -15,3 +15,4 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: 7d7c140c180f247b08e97c72bac291af, type: 2}
   output: {fileID: 11400000, guid: 6e09bc7a219524067a55490a27d95f88, type: 2}
   cookTimeMax: 5
+  onStoveState: 2

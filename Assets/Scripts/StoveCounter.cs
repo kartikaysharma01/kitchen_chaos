@@ -86,7 +86,7 @@ public class StoveCounter : BaseCounter, IProgressBar {
                     OnProgressChange?.Invoke(this, new IProgressBar.OnProgressChangeArgs{
                         progressNormalised = 0
                     }); 
-                    current_state = State.Frying;
+                    current_state = stoveReceipeSO.onStoveState;
                     OnStateChnage?.Invoke(this, new OnStateChnageArgs{state = current_state});
                 }
             } else {
