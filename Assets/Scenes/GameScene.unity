@@ -736,6 +736,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 752321892}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &348575967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3628087260882038318, guid: 6268375642a57495299e477a10b9c4e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2141920728}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &361948690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1772,6 +1778,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb1b33c13cafd4916b68f0c9994187e7, type: 3}
+--- !u!1 &1001061748 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8797495449985792423, guid: 6268375642a57495299e477a10b9c4e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2141920728}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1106813474
 GameObject:
   m_ObjectHideFlags: 0
@@ -2079,6 +2091,7 @@ Transform:
   - {fileID: 1739688856}
   - {fileID: 2000889432}
   - {fileID: 1140116710}
+  - {fileID: 1898807253}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1399387906
@@ -2235,6 +2248,45 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1978028515}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1762984802 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5015394659738997866, guid: 6268375642a57495299e477a10b9c4e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2141920728}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1762984804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762984802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88edfb75af9c4889a2c6abc14c33673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stoveCounter: {fileID: 1898807255}
+  stoveOnVisualGO: {fileID: 1001061748}
+  sizzlingParticlesGO: {fileID: 348575967}
+--- !u!4 &1898807253 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8716877555410322372, guid: 6268375642a57495299e477a10b9c4e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2141920728}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1898807255 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1820450355278803303, guid: 6268375642a57495299e477a10b9c4e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2141920728}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732ccb0ad3e314f39b210baaa87250a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1934445802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2509,6 +2561,88 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 195627078}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2141920728
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1348452733}
+    m_Modifications:
+    - target: {fileID: 1935657639431714377, guid: 6268375642a57495299e477a10b9c4e7,
+        type: 3}
+      propertyPath: m_Name
+      value: StoveCounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 3628087260882038318, guid: 6268375642a57495299e477a10b9c4e7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8716877555410322372, guid: 6268375642a57495299e477a10b9c4e7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8716877555410322372, guid: 6268375642a57495299e477a10b9c4e7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8716877555410322372, guid: 6268375642a57495299e477a10b9c4e7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8716877555410322372, guid: 6268375642a57495299e477a10b9c4e7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8716877555410322372, guid: 6268375642a57495299e477a10b9c4e7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8716877555410322372, guid: 6268375642a57495299e477a10b9c4e7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8716877555410322372, guid: 6268375642a57495299e477a10b9c4e7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8716877555410322372, guid: 6268375642a57495299e477a10b9c4e7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8716877555410322372, guid: 6268375642a57495299e477a10b9c4e7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8716877555410322372, guid: 6268375642a57495299e477a10b9c4e7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797495449985792423, guid: 6268375642a57495299e477a10b9c4e7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5015394659738997866, guid: 6268375642a57495299e477a10b9c4e7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1762984804}
+  m_SourcePrefab: {fileID: 100100000, guid: 6268375642a57495299e477a10b9c4e7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
