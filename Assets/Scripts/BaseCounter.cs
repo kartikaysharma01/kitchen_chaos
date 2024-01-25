@@ -13,7 +13,7 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent {
     }
 
     public virtual void InteractAlternate(Player player) {
-        Debug.LogError("BaseCounter.InteractAlternate() was called. Specific Counter classes are supposed to override this call");
+        // to be overriden by some counters
     }
     
     public Transform GetKitechObjectSpawnPoint() {
