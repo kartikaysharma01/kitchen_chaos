@@ -5,15 +5,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CuttingCounter : BaseCounter {
+public class CuttingCounter : BaseCounter, IProgressBar {
     [SerializeField] private CuttingReceipeSO[] cuttingReceipeSOArray;
     private int cuttingProgress;
 
-    public event EventHandler<OnCuttingProgressChangeArgs> OnCuttingProgressChange;
-    public class OnCuttingProgressChangeArgs: EventArgs {
-        public float progressNormalised;
-    }
     public event EventHandler OnCut;
+    public event EventHandler<IProgressBar.OnProgressChangeArgs> OnProgressChange;
 
     // on interact, let player pickup or drop kitchen objects
     public override void Interact(Player player) {
@@ -25,7 +22,7 @@ public class CuttingCounter : BaseCounter {
                     // if what player is carrying can be cut, let him drop it
                     player.GetKitchenObject().SetKitchenObjectParent(this);
                     cuttingProgress = 0;
-                    OnCuttingProgressChange?.Invoke(this, new OnCuttingProgressChangeArgs{
+                    OnProgressChange?.Invoke(this, new IProgressBar.OnProgressChangeArgs{
                         progressNormalised = cuttingProgress
                     });
                 }
@@ -49,7 +46,7 @@ public class CuttingCounter : BaseCounter {
             cuttingProgress++; 
             CuttingReceipeSO cuttingReceipeSO = GetCuttingReceipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
             OnCut?.Invoke(this, EventArgs.Empty);
-            OnCuttingProgressChange?.Invoke(this, new OnCuttingProgressChangeArgs{
+            OnProgressChange?.Invoke(this, new IProgressBar.OnProgressChangeArgs{
                 progressNormalised = (float)cuttingProgress / cuttingReceipeSO.cuttingProgressMax
             });
 

@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoveCounter : BaseCounter {
+public class StoveCounter : BaseCounter, IProgressBar {
 
     [SerializeField] private StoveReceipeSO[] stoveReceipeSOArray;
     private float stoveTimer;
 
     public event EventHandler<OnStateChnageArgs> OnStateChnage;
+    public event EventHandler<IProgressBar.OnProgressChangeArgs> OnProgressChange;
+
     public class OnStateChnageArgs: EventArgs{
         public State state;
     }
@@ -31,6 +33,9 @@ public class StoveCounter : BaseCounter {
                 case State.Idle:
                     break;
                 case State.Frying:
+                    OnProgressChange?.Invoke(this, new IProgressBar.OnProgressChangeArgs{
+                        progressNormalised = stoveTimer/stoveReceipeSO.cookTimeMax
+                    }); 
                     if (stoveTimer > stoveReceipeSO.cookTimeMax) {
                         // destroy unfried kitchen object
                         GetKitchenObject().DestroySelf();
@@ -44,6 +49,9 @@ public class StoveCounter : BaseCounter {
                     }
                     break;
                 case State.Fried:
+                    OnProgressChange?.Invoke(this, new IProgressBar.OnProgressChangeArgs{
+                        progressNormalised = stoveTimer/stoveReceipeSO.cookTimeMax
+                    }); 
                     if (stoveTimer > stoveReceipeSO.cookTimeMax) {
                         // destroy fried kitchen object
                         GetKitchenObject().DestroySelf();
@@ -53,6 +61,9 @@ public class StoveCounter : BaseCounter {
                         stoveTimer = 0;
                         current_state = State.Burned;
                         OnStateChnage?.Invoke(this, new OnStateChnageArgs{state = current_state});
+                        OnProgressChange?.Invoke(this, new IProgressBar.OnProgressChangeArgs{
+                            progressNormalised = 0f
+                        });
                     }
                     break;
                 case State.Burned:
@@ -72,6 +83,9 @@ public class StoveCounter : BaseCounter {
                     player.GetKitchenObject().SetKitchenObjectParent(this);
                     stoveReceipeSO = GetStoveReceipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
                     stoveTimer = 0;
+                    OnProgressChange?.Invoke(this, new IProgressBar.OnProgressChangeArgs{
+                        progressNormalised = 0
+                    }); 
                     current_state = State.Frying;
                     OnStateChnage?.Invoke(this, new OnStateChnageArgs{state = current_state});
                 }
@@ -86,6 +100,10 @@ public class StoveCounter : BaseCounter {
                 // player is not carrying anything, let him pickup counter object, and set stove to idle
                 GetKitchenObject().SetKitchenObjectParent(player);
                 current_state = State.Idle;
+                OnStateChnage?.Invoke(this, new OnStateChnageArgs{state = current_state});
+                OnProgressChange?.Invoke(this, new IProgressBar.OnProgressChangeArgs{
+                    progressNormalised = 0
+                }); 
             }
         }
     }
