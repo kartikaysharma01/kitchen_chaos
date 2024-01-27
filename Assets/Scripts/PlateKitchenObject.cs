@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,10 @@ using UnityEngine;
 public class  PlateKitchenObject : KitchenObject {
 
     private List<KitchenObjectSO> onPlatekitchenObjectSOList;
+    public event EventHandler<OnIngredientAddArgs> OnIngredientAdd;
+    public class OnIngredientAddArgs: EventArgs {
+        public KitchenObjectSO kitchenObjectSO;
+    }
     [SerializeField]  private List<KitchenObjectSO> validOnPlateKitchenObjectSOList;
     
     private void Awake() {
@@ -12,7 +17,11 @@ public class  PlateKitchenObject : KitchenObject {
     }
     public bool TryAddingToPlate(KitchenObjectSO kitchenObjectSO) {
         if (CanBePutOnPlate(kitchenObjectSO)) {
+            // if object can be put on plate, add it to the list and fire an event to enable visual
             onPlatekitchenObjectSOList.Add(kitchenObjectSO);
+            OnIngredientAdd?.Invoke(this, new OnIngredientAddArgs{
+                kitchenObjectSO = kitchenObjectSO
+            });
             return true;
         }
          return false;
