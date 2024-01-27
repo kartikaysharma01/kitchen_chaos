@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class  PlateKitchenObject : KitchenObject {
 
-    private List<KitchenObjectSO> onPlatekitchenObjectSOList;
+    private List<KitchenObjectSO> onPlateKitchenObjectSOList;
     public event EventHandler<OnIngredientAddArgs> OnIngredientAdd;
     public class OnIngredientAddArgs: EventArgs {
         public KitchenObjectSO kitchenObjectSO;
@@ -13,12 +13,12 @@ public class  PlateKitchenObject : KitchenObject {
     [SerializeField]  private List<KitchenObjectSO> validOnPlateKitchenObjectSOList;
     
     private void Awake() {
-        onPlatekitchenObjectSOList = new List<KitchenObjectSO>();
+        onPlateKitchenObjectSOList = new List<KitchenObjectSO>();
     }
     public bool TryAddingToPlate(KitchenObjectSO kitchenObjectSO) {
         if (CanBePutOnPlate(kitchenObjectSO)) {
             // if object can be put on plate, add it to the list and fire an event to enable visual
-            onPlatekitchenObjectSOList.Add(kitchenObjectSO);
+            onPlateKitchenObjectSOList.Add(kitchenObjectSO);
             OnIngredientAdd?.Invoke(this, new OnIngredientAddArgs{
                 kitchenObjectSO = kitchenObjectSO
             });
@@ -43,7 +43,10 @@ public class  PlateKitchenObject : KitchenObject {
     }
 
     private bool AlreadyOnPlate(KitchenObjectSO kitchenObjectSO) {
-        return onPlatekitchenObjectSOList.Contains(kitchenObjectSO);
+        return onPlateKitchenObjectSOList.Contains(kitchenObjectSO);
     }
 
+    public List<KitchenObjectSO> GetonPlateKitchenObjectSOList() {
+        return onPlateKitchenObjectSOList;
+    }
 }
