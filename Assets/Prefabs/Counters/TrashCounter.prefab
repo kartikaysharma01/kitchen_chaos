@@ -13,6 +13,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrashCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 5309943669622120102, guid: e085bf2dbb4994c0fabe333fc25a7974,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.2771386
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309943669622120102, guid: e085bf2dbb4994c0fabe333fc25a7974,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1.2759528
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309943669622120102, guid: e085bf2dbb4994c0fabe333fc25a7974,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.0029903054
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309943669622120102, guid: e085bf2dbb4994c0fabe333fc25a7974,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.0028393269
+      objectReference: {fileID: 0}
     - target: {fileID: 5333842618162225664, guid: e085bf2dbb4994c0fabe333fc25a7974,
         type: 3}
       propertyPath: m_LocalPosition.x
