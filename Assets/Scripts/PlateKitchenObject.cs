@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class  PlateKitchenObject : KitchenObject {
 
-    private List<KitchenObjectSO> onPlateKitchenObjectSOList;
+    public List<KitchenObjectSO> onPlateKitchenObjectSOList;
     public event EventHandler<OnIngredientAddArgs> OnIngredientAdd;
     public class OnIngredientAddArgs: EventArgs {
         public KitchenObjectSO kitchenObjectSO;

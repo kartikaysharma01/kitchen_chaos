@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class ReceipeSO : ScriptableObject {
+public class DishReceipeSO : ScriptableObject {
 
-    public List<KitchenObjectSO> kitchenObjectSOList;
+    public List<KitchenObjectSO> kitchenObjectSOsList;
     public string receipeName;
 }
