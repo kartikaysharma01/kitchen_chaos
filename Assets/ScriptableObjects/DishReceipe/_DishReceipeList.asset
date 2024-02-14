@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e93c61a5bec1a48b6a4279dfe74bb589, type: 3}
   m_Name: _DishReceipeList
   m_EditorClassIdentifier: 
-  deliveryReceipeSOList:
+  dishReceipeSOsList:
   - {fileID: 11400000, guid: 10fee43e5230242dd92c90d924f1686e, type: 2}
   - {fileID: 11400000, guid: 9ff4437fd532f48dfafd9d43708f6d89, type: 2}
   - {fileID: 11400000, guid: f5975697cec3948769bf409231a7d46c, type: 2}
