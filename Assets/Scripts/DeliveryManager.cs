@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.EventSystems;
+using System;
 
 
 public class DeliveryManager : MonoBehaviour {
     public static DeliveryManager Instance {get; private set;}
 
     [SerializeField] private DishReceipeListSO dishReceipesListSO;
+
+    public event EventHandler OnReceipeSpawned;
+    public event EventHandler OnDishDelivered;
 
      private List<DishReceipeSO> waitingDishReceipeSOsList;
      private float spawnReceipeTimer;
@@ -27,9 +32,9 @@ public class DeliveryManager : MonoBehaviour {
             if (waitingDishReceipeSOsList.Count < waitingReceipeMax) {
                 spawnReceipeTimer = spawnReceipeTimerMax;
 
-                DishReceipeSO dishReceipeSO = dishReceipesListSO.dishReceipeSOsList[Random.Range(0, dishReceipesListSO.dishReceipeSOsList.Count)];
+                DishReceipeSO dishReceipeSO = dishReceipesListSO.dishReceipeSOsList[UnityEngine.Random.Range(0, dishReceipesListSO.dishReceipeSOsList.Count)];
                 waitingDishReceipeSOsList.Add(dishReceipeSO);
-                Debug.Log(dishReceipeSO);
+                OnReceipeSpawned?.Invoke(this, EventArgs.Empty);
             }
         }
     }
@@ -38,13 +43,21 @@ public class DeliveryManager : MonoBehaviour {
         for (int i=0; i< waitingDishReceipeSOsList.Count; i++) {
             if (plateKitchenObject.onPlateKitchenObjectSOList.Count == waitingDishReceipeSOsList[i].kitchenObjectSOsList.Count) {
                 // plate has same number of ingridients as one of the waiting receipes
-                VerifyPlateIngridientsWithReceipe(plateKitchenObject.onPlateKitchenObjectSOList, waitingDishReceipeSOsList[i].kitchenObjectSOsList);
+                bool correctDish = VerifyPlateIngridientsWithReceipe(plateKitchenObject.onPlateKitchenObjectSOList, waitingDishReceipeSOsList[i].kitchenObjectSOsList);
+                if (correctDish) {
+                    waitingDishReceipeSOsList.RemoveAt(i);
+                    OnDishDelivered?.Invoke(this, EventArgs.Empty);
+                }
             }
         }
     }
 
-    private void VerifyPlateIngridientsWithReceipe(List<KitchenObjectSO> onPlateKitchenObjectSOList, List<KitchenObjectSO> waitingDishReceipeKitchenObjectSOsList) {
+    private bool VerifyPlateIngridientsWithReceipe(List<KitchenObjectSO> onPlateKitchenObjectSOList, List<KitchenObjectSO> waitingDishReceipeKitchenObjectSOsList) {
         // check if plate has any other ingridients than on waitingDishReceipeKitchenObjectSOsList
-        bool correctDish = !onPlateKitchenObjectSOList.Except(waitingDishReceipeKitchenObjectSOsList).Any();
+        return !onPlateKitchenObjectSOList.Except(waitingDishReceipeKitchenObjectSOsList).Any();
+    }
+
+    public List<DishReceipeSO> getWaitingDishReceipeSOsList() {
+        return waitingDishReceipeSOsList;
     }
 }
