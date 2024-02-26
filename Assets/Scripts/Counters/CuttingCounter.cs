@@ -10,6 +10,7 @@ public class CuttingCounter : BaseCounter, IProgressBar {
     private int cuttingProgress;
 
     public event EventHandler OnCut;
+    public static event EventHandler OnAnyCut;
     public event EventHandler<IProgressBar.OnProgressChangeArgs> OnProgressChange;
 
     // on interact, let player pickup or drop kitchen objects
@@ -53,6 +54,7 @@ public class CuttingCounter : BaseCounter, IProgressBar {
             cuttingProgress++; 
             CuttingReceipeSO cuttingReceipeSO = GetCuttingReceipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
             OnCut?.Invoke(this, EventArgs.Empty);
+            OnAnyCut?.Invoke(this, EventArgs.Empty);
             OnProgressChange?.Invoke(this, new IProgressBar.OnProgressChangeArgs{
                 progressNormalised = (float)cuttingProgress / cuttingReceipeSO.cuttingProgressMax
             });

@@ -13,6 +13,8 @@ public class DeliveryManager : MonoBehaviour {
 
     public event EventHandler OnReceipeSpawned;
     public event EventHandler OnDishDelivered;
+    public event EventHandler OnSuccessfulDelivery;
+    public event EventHandler OnFailedDelivery;
 
      private List<DishReceipeSO> waitingDishReceipeSOsList;
      private float spawnReceipeTimer;
@@ -47,9 +49,12 @@ public class DeliveryManager : MonoBehaviour {
                 if (correctDish) {
                     waitingDishReceipeSOsList.RemoveAt(i);
                     OnDishDelivered?.Invoke(this, EventArgs.Empty);
+                    OnSuccessfulDelivery?.Invoke(this, EventArgs.Empty);
+                    return;
                 }
             }
         }
+        OnFailedDelivery?.Invoke(this, EventArgs.Empty);
     }
 
     private bool VerifyPlateIngridientsWithReceipe(List<KitchenObjectSO> onPlateKitchenObjectSOList, List<KitchenObjectSO> waitingDishReceipeKitchenObjectSOsList) {
