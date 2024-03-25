@@ -16,10 +16,12 @@ public class DeliveryManager : MonoBehaviour {
     public event EventHandler OnSuccessfulDelivery;
     public event EventHandler OnFailedDelivery;
 
-     private List<DishReceipeSO> waitingDishReceipeSOsList;
-     private float spawnReceipeTimer;
-     private float spawnReceipeTimerMax = 4f;
-     private int waitingReceipeMax = 4;
+    private List<DishReceipeSO> waitingDishReceipeSOsList;
+    private float spawnReceipeTimer;
+    private float spawnReceipeTimerMax = 4f;
+    private int waitingReceipeMax = 4;
+
+    private int successfulDeliveryAmount;
 
     private void Awake() {
         Instance = this;
@@ -50,6 +52,7 @@ public class DeliveryManager : MonoBehaviour {
                     waitingDishReceipeSOsList.RemoveAt(i);
                     OnDishDelivered?.Invoke(this, EventArgs.Empty);
                     OnSuccessfulDelivery?.Invoke(this, EventArgs.Empty);
+                    successfulDeliveryAmount++;
                     return;
                 }
             }
@@ -64,5 +67,9 @@ public class DeliveryManager : MonoBehaviour {
 
     public List<DishReceipeSO> getWaitingDishReceipeSOsList() {
         return waitingDishReceipeSOsList;
+    }
+
+    public int GetSuccessfulDeliveryAmount() {
+        return successfulDeliveryAmount;
     }
 }
