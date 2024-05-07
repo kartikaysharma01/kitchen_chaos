@@ -20,10 +20,19 @@ public class GameManager : MonoBehaviour {
     private float countdownToStartTimer = 3f;
     private float gamePlayimgTimer;
     private float gamePlayimgTimerMax = 20f;
+    private bool isGamePaused;
     
     private void Awake() {
         state = State.WaitingToStart;
         Instance = this;
+    }
+
+    private void Start() {
+        GameInput.Instance.OnPauseAction += OnPauseAction_Listner;
+    }
+
+    private void OnPauseAction_Listner(object sender, EventArgs e) {
+        TogglePause();
     }
 
     private void Update() {
@@ -74,5 +83,14 @@ public class GameManager : MonoBehaviour {
 
     public float GetGamePlayingTimerNormalised() {
         return (gamePlayimgTimer/gamePlayimgTimerMax);
+    }
+
+    public void TogglePause() {
+        isGamePaused = !isGamePaused;
+        if (isGamePaused) {
+            Time.timeScale = 0f;
+        } else {
+            Time.timeScale = 1f;
+        }
     }
 }
