@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class TrashCounter : BaseCounter {
     public static event EventHandler OnTrashBinOpen;
+    new public static void ResetStaticData() {
+        OnTrashBinOpen = null;
+    }
 
     // on interact, let player drop kitchen objects in trash
     public override void Interact(Player player) {

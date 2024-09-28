@@ -11,6 +11,10 @@ public class CuttingCounter : BaseCounter, IProgressBar {
 
     public event EventHandler OnCut;
     public static event EventHandler OnAnyCut;
+    new public static void ResetStaticData() {
+        OnAnyCut = null;
+    }
+
     public event EventHandler<IProgressBar.OnProgressChangeArgs> OnProgressChange;
 
     // on interact, let player pickup or drop kitchen objects

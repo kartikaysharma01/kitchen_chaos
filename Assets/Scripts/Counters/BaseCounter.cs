@@ -10,6 +10,9 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent {
     private KitchenObject kitchenObject;
 
     public static event EventHandler OnObjectDropOnCounter;
+    public static void ResetStaticData() {
+        OnObjectDropOnCounter = null;
+    }
 
     public virtual void Interact(Player player) {
         Debug.LogError("BaseCounter.Interact() was called. Specific Counter classes are supposed to override this call");
