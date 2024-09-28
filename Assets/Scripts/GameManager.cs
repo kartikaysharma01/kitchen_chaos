@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance  {private set;  get;}
 
     public event EventHandler OnStateChange;
+    public event EventHandler OnGamePaused;
+    public event EventHandler OnGameUnPaused;
 
     private enum State {
         WaitingToStart,
@@ -89,8 +91,10 @@ public class GameManager : MonoBehaviour {
         isGamePaused = !isGamePaused;
         if (isGamePaused) {
             Time.timeScale = 0f;
+            OnGamePaused?.Invoke(this, EventArgs.Empty);
         } else {
             Time.timeScale = 1f;
+            OnGameUnPaused?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -21,6 +21,13 @@ public class GameInput : MonoBehaviour {
         playerInputConsole.Player.Pause.performed += Pause_performed;
     }
 
+    private void OnDestroy() {
+        playerInputConsole.Player.Interact.performed -= Interact_performed;
+        playerInputConsole.Player.InteractAlternate.performed -= InteractAlternate_performed;
+        playerInputConsole.Player.Pause.performed -= Pause_performed;
+        playerInputConsole.Dispose();
+    }
+
     public Vector2 GetNormalisedMovementVector() {
         Vector2 inputVector = playerInputConsole.Player.Move.ReadValue<Vector2>();
 
