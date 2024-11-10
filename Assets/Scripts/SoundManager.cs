@@ -4,7 +4,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
+    public static SoundManager Instance { get; private set; }
+
+    private const string PLAYER_PREFS_SOUND_VOLUME = "SoundVolume";
+
+    private float volume = 0.1f;
+
     [SerializeField] private SoundClipsSO soundClipsSO;
+
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else {
+            Destroy(gameObject);
+        }
+        volume = PlayerPrefs.GetFloat(PLAYER_PREFS_SOUND_VOLUME, 0.4f);
+
+    }
 
     private void Start() {
         DeliveryManager.Instance.OnSuccessfulDelivery += DeliveryManager_OnSuccessfulDelivery;
@@ -42,11 +60,24 @@ public class SoundManager : MonoBehaviour {
         PlaySound(soundClipsSO.deliveryFailSounds, DeliveryManager.Instance.transform.position);
     }
 
-    private void PlaySound(List<AudioClip> audioClipList, Vector3 position, float volume = 1f) {
-        AudioSource.PlayClipAtPoint(audioClipList[UnityEngine.Random.Range(0, audioClipList.Count)], position, volume);
+    private void PlaySound(List<AudioClip> audioClipList, Vector3 position, float volumeMultiplier = 1f) {
+        AudioSource.PlayClipAtPoint(audioClipList[UnityEngine.Random.Range(0, audioClipList.Count)], position, volume * volumeMultiplier);
     }
 
     private void PlaySound(AudioClip audioClip, Vector3 position, float volume = 1f) {
         AudioSource.PlayClipAtPoint(audioClip, position, volume);
+    }
+
+    public void ChangeVolume() {
+        volume += 0.1f;
+        if (volume > 1f) {
+            volume = 0f;
+        }
+        PlayerPrefs.SetFloat(PLAYER_PREFS_SOUND_VOLUME, volume);
+        PlayerPrefs.Save();
+    }
+
+    public float GetVolume() {
+        return volume;
     }
 }
