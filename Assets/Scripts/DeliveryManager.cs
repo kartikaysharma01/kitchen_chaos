@@ -33,7 +33,7 @@ public class DeliveryManager : MonoBehaviour {
 
         if (spawnReceipeTimer <= 0f) {
             // spawn a new reciepe (take a new order)
-            if (waitingDishReceipeSOsList.Count < waitingReceipeMax) {
+            if (GameManager.Instance.IsGamePLaying() && waitingDishReceipeSOsList.Count < waitingReceipeMax) {
                 spawnReceipeTimer = spawnReceipeTimerMax;
 
                 DishReceipeSO dishReceipeSO = dishReceipesListSO.dishReceipeSOsList[UnityEngine.Random.Range(0, dishReceipesListSO.dishReceipeSOsList.Count)];
